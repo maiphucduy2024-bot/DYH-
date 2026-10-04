@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DIY ENGLISH 8 • Ôn thi lớp 8</title>
+<style>
+*{box-sizing:border-box}
+body,#app{
+  margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#071a33,#102b4c 45%,#07111f);
+  color:#fff;font-family:Arial,sans-serif;overflow:hidden
+}
+.card{
+  width:min(720px,94vw);max-height:92vh;overflow:auto;padding:28px;border:1px solid #4da3ff;
+  border-radius:24px;background:rgba(12,8,24,.94);
+  box-shadow:0 0 35px #1685ff33;text-align:center
+}
+h1{margin:0 0 8px;color:#8dccff;text-shadow:0 0 15px #1685ff}
+.sub{color:#aaa;margin-bottom:25px}
+button{
+  width:100%;padding:13px;margin:8px 0;border:0;border-radius:12px;
+  color:white;font-weight:bold;cursor:pointer;background:linear-gradient(90deg,#1677d2,#29a8ff);
+  box-shadow:0 0 15px #1685ff55
+}
+button:hover{filter:brightness(1.15)}
+.hidden{display:none}
+.row,.exam-card{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px;margin:10px 0;border-radius:14px;background:#0d1d31;border:1px solid #23496b
+}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid button{margin:0}
+.exam-card{text-align:left}.exam-card h3{margin:0 0 8px}.answer{width:100%;padding:11px;border-radius:10px;border:1px solid #315a7e;background:#081522;color:#fff;margin-top:8px}
+.score{font-size:26px;color:#7dccff;font-weight:bold;margin:12px}
+.switch{width:52px;height:28px;background:#392d4e;border-radius:30px;position:relative;cursor:pointer}
+.switch:after{content:"";position:absolute;width:22px;height:22px;top:3px;left:4px;border-radius:50%;background:#aaa;transition:.25s}
+.switch.on{background:#7c3aed;box-shadow:0 0 12px #8b5cf6}
+.switch.on:after{left:26px;background:#fff}
+#log{height:48px;margin-top:15px;color:#bfa7d9;font-size:13px}
+.small{font-size:11px;color:#777;margin-top:14px}
+.content-card{display:grid;grid-template-columns:140px 1fr 1fr;gap:18px;margin-top:12px;padding:20px;text-align:left;border-radius:18px;background:linear-gradient(145deg,#102943,#0b1c30);border:1px solid #2b5275;box-shadow:0 12px 28px #0005}
+.content-head{display:flex;align-items:center;gap:10px;color:#9ed8ff;font-size:18px;font-weight:800;line-height:1.25}
+.content-head .icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#1685ff22;border:1px solid #1685ff55;font-size:22px}
+.term-block{padding:4px 0}.term-title{display:flex;align-items:center;gap:8px;margin:0 0 9px;font-size:14px;color:#7dccff}.term-title span{padding:4px 8px;border-radius:7px;background:#1685ff1c;border:1px solid #1685ff44;font-size:11px}.units{margin:0;color:#d8e6f3;font-size:12px;line-height:1.75}.focus{margin:0;color:#9fb5c9;font-size:11px;line-height:1.65}
+@media(max-width:650px){.content-card{grid-template-columns:1fr;gap:12px}.content-head{font-size:16px}.term-block{padding-top:2px}}
+</style>
+</head>
+
+<body id="app">
+
+<div class="card" id="gate">
+  <h1>📘 DIY ENGLISH 8</h1>
+  <div class="sub">ÔN THI TIẾNG ANH LỚP 8 • 4 KỸ NĂNG</div>
+  <h2>🎓 LUYỆN THI THEO HỌC KỲ</h2>
+  <p class="sub">Giữa kỳ 1 • Cuối kỳ 1 • Giữa kỳ 2 • Cuối kỳ 2</p>
+  <button onclick="openMenu()">🚀 BẮT ĐẦU LUYỆN TẬP</button>
+  <div class="small">Có bài tập mẫu cho Nghe • Nói • Đọc • Viết</div>
+</div>
+
+<div class="card hidden" id="menu">
+  <h1>📚 DIY ENGLISH 8</h1>
+  <div class="sub">Ngân hàng đề bám sát Global Success 8</div>
+
+  <div class="grid">
+    <button onclick="showExam('Giữa kỳ 1')">📝 Giữa kỳ 1</button>
+    <button onclick="showExam('Cuối kỳ 1')">📖 Cuối kỳ 1</button>
+    <button onclick="showExam('Giữa kỳ 2')">📝 Giữa kỳ 2</button>
+    <button onclick="showExam('Cuối kỳ 2')">🏆 Cuối kỳ 2</button>
+  </div>
+
+  <div class="grid">
+    <button onclick="showExam('Listening')">🎧 NGHE</button>
+    <button onclick="showExam('Speaking')">🎤 NÓI</button>
+    <button onclick="showExam('Reading')">📖 ĐỌC HIỂU</button>
+    <button onclick="showExam('Writing')">✍️ VIẾT</button>
+  </div>
+
+  <div class="content-card">
+    <div class="content-head">
+      <div class="icon">📚</div>
+      <div>Nội dung<br>Global Success 8</div>
+    </div>
+
+    <div class="term-block">
+      <h3 class="term-title"><span>HK1</span> Học kỳ 1</h3>
+      <p class="units">
+        <b>Unit 1</b> Leisure time<br>
+        <b>Unit 2</b> Life in the countryside<br>
+        <b>Unit 3</b> Teenagers<br>
+        <b>Unit 4</b> Ethnic groups of Viet Nam<br>
+        <b>Unit 5</b> Our customs and traditions<br>
+        <b>Unit 6</b> Lifestyles
+      </p>
+    </div>
+
+    <div class="term-block">
+      <h3 class="term-title"><span>HK2</span> Học kỳ 2</h3>
+      <p class="units">
+        <b>Unit 7</b> Environmental protection<br>
+        <b>Unit 8</b> Shopping<br>
+        <b>Unit 9</b> Natural disasters<br>
+        <b>Unit 10</b> Communication in the future<br>
+        <b>Unit 11</b> Science and technology<br>
+        <b>Unit 12</b> Life on other planets
+      </p>
+    </div>
+
+    <p class="focus" style="grid-column:1/-1">
+      🎯 <b>Dạng bài trọng tâm:</b>
+      nghe chọn đáp án / điền từ / True-False · phát âm · từ vựng & ngữ pháp ·
+      đọc hiểu tìm thông tin / suy luận · viết lại câu & viết đoạn văn.
+    </p>
+  </div>
+
+  <div id="exam" class="exam-card" style="display:none"></div>
+
+  <button onclick="aiGrade()">🤖 AI CHỮA BÀI CHI TIẾT</button>
+  <div id="ai" class="exam-card" style="display:none"></div>
+</div>
+
+<script>
+
+function openMenu(){
+  document.getElementById("gate").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+}
+
+function showExam(term){
+
+  const e=document.getElementById("exam");
+  e.style.display="block";
+
+  e.innerHTML=`
+  <h3>📌 ${term} — Đề mẫu Global Success 8</h3>
+
+  <p>
+    <b>1. Listening:</b>
+    ${getListeningInfo(term)}
+  </p>
+
+  <button onclick="playListening(this)">
+    ▶ PHÁT BÀI NGHE
+  </button>
+
+  <div id="listenQuestions" class="small">
+    ▶ Bấm phát bài nghe để hiện câu hỏi.
+  </div>
+
+  <p>
+    <b>2. Speaking:</b>
+    Trả lời câu hỏi hoặc trình bày ngắn theo chủ đề trong các Unit.
+  </p>
+
+  <textarea
+    class="answer"
+    id="speak"
+    rows="3"
+    placeholder="Gõ câu trả lời nói của bạn để AI nhận xét..."
+  ></textarea>
+
+  <p>
+    <b>3. Reading:</b>
+    Đọc hiểu — tìm thông tin, từ khóa, ý chính và suy luận.
+  </p>
+
+  <p>
+    Nam enjoys helping his community.
+    Every weekend, he joins a clean-up activity with his friends.
+  </p>
+
+  <select class="answer" id="read">
+    <option value="">-- Chọn đáp án --</option>
+    <option>A. He dislikes helping people.</option>
+    <option value="B">B. He joins a clean-up activity.</option>
+    <option>C>He never goes outside.</option>
+  </select>
+
+  <p>
+    <b>4. Language & Writing:</b>
+    Từ vựng • ngữ pháp • phát âm,
+    sau đó viết đoạn văn khoảng 80–100 từ theo chủ đề.
+  </p>
+
+  <textarea
+    class="answer"
+    id="write"
+    rows="5"
+    placeholder="Viết bài của bạn ở đây..."
+  ></textarea>
+
+  <button onclick="checkExam('${term}')">
+    ✅ NỘP BÀI
+  </button>
+
+  <div id="result"></div>
+  `;
+}
+
+function getListeningInfo(term){
+
+  const info={
+
+    'Giữa kỳ 1':
+      'Nghe về thời gian rảnh và cuộc sống ở nông thôn — chọn đáp án đúng.',
+
+    'Cuối kỳ 1':
+      'Nghe về thanh thiếu niên và phong tục truyền thống — True/False.',
+
+    'Giữa kỳ 2':
+      'Nghe về bảo vệ môi trường và mua sắm — điền thông tin còn thiếu.',
+
+    'Cuối kỳ 2':
+      'Nghe về thiên tai, công nghệ và tương lai — chọn đáp án và từ khóa.',
+
+    'Listening':
+      'Luyện nghe tổng hợp nhiều chủ đề — mỗi lần chọn một bài khác nhau.'
+  };
+
+  return info[term] ||
+    'Nghe 2 lần — luyện chọn đáp án, điền từ và True/False.';
+}
+
+function speakPractice(){
+
+  if(
+    !('webkitSpeechRecognition' in window ||
+      'SpeechRecognition' in window)
+  ){
+    alert(
+      'Trình duyệt này chưa hỗ trợ nhận giọng nói. ' +
+      'Bạn có thể nhập phần Speaking để AI nhận xét.'
+    );
+    return;
+  }
+
+  const R =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  const r=new R();
+
+  r.lang='en-US';
+  r.start();
+
+  r.onresult=e=>{
+    document.getElementById('speak').value =
+      e.results[0][0].transcript;
+  };
+}
+
+function playListening(btn){
+
+  const term =
+    document.querySelector('#exam h3')?.textContent || '';
+
+  const texts={
+
+    'Giữa kỳ 1':
+      'Hi, I am Lan. In my free time, I enjoy reading books and playing badminton. My cousin lives in the countryside. He likes helping his parents on the farm and riding a bicycle around the village.',
+
+    'Cuối kỳ 1':
+      'Mai is a teenager who enjoys spending time with her friends. At weekends, her family often follows a traditional custom of having dinner together. Everyone helps prepare the food and shares stories after dinner.',
+
+    'Giữa kỳ 2':
+      'Our school is starting an environmental project. Students will collect paper and plastic bottles every Friday. They will also visit a local shop to learn how to choose useful products and avoid unnecessary packaging.',
+
+    'Cuối kỳ 2':
+      'Last year, our town had a strong storm. People prepared emergency bags and listened to weather warnings. In the future, new technology may help us communicate faster and give earlier warnings about natural disasters.',
+
+    'Listening':
+      'Hello! My name is Nam. I enjoy helping my community. Every weekend, I join a clean-up activity with my friends.'
+  };
+
+  const questions={
+
+    'Giữa kỳ 1':
+      'After listening, answer: 1) What does Lan enjoy? 2) Where does her cousin live? 3) What does he help his parents with?',
+
+    'Cuối kỳ 1':
+      'After listening, answer True/False: 1) Mai is a teenager. 2) Her family has dinner together at weekends. 3) Nobody helps prepare the food.',
+
+    'Giữa kỳ 2':
+      'After listening, fill in the blanks: 1) Students collect paper and ______ every Friday. 2) They visit a local ______. 3) They learn to avoid unnecessary ______.',
+
+    'Cuối kỳ 2':
+      'After listening, choose: 1) What happened last year? 2) What did people listen to? 3) What may technology provide earlier?',
+
+    'Listening':
+      'After listening, answer: 1) Who is speaking? 2) What activity does he join? 3) When does he join it?'
+  };
+
+  let key =
+    Object.keys(texts).find(k=>term.includes(k)) ||
+    'Listening';
+
+  const text=texts[key];
+
+  if(!('speechSynthesis' in window)){
+    alert(
+      'Trình duyệt này chưa hỗ trợ phát giọng nói.'
+    );
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const u =
+    new SpeechSynthesisUtterance(text);
+
+  u.lang='en-US';
+  u.rate=.9;
+
+  btn.textContent='🔊 Đang phát bài nghe...';
+
+  u.onend=()=>{
+    btn.textContent='▶ PHÁT LẠI BÀI NGHE';
+  };
+
+  speechSynthesis.speak(u);
+
+  const oldQ =
+    document.getElementById('listenQuestions');
+
+  if(oldQ){
+    oldQ.innerHTML =
+      '<b>📝 Câu hỏi:</b> ' +
+      (questions[key] || questions.Listening);
+  }
+}
+
+function checkExam(term){
+
+  const read =
+    document.getElementById("read").value;
+
+  const write =
+    document.getElementById("write").value.trim();
+
+  const result =
+    document.getElementById("result");
+
+  result.innerHTML=`
+    <div class="score">
+      ${read==='B' ? '25':'0'}/25
+    </div>
+
+    <p>
+      <b>AI nhận xét sơ bộ:</b>
+      ${
+        read==='B'
+        ? 'Phần đọc hiểu: đúng đáp án, bạn xác định được ý chính.'
+        : 'Phần đọc hiểu: chưa đúng, hãy đọc lại câu hỏi và tìm từ khóa trong đoạn văn.'
+      }
+    </p>
+
+    <p>
+      Phần viết:
+      ${
+        write.length>30
+        ? 'Đã nhận bài. AI sẽ kiểm tra ngữ pháp, từ vựng, cấu trúc và độ mạch lạc.'
+        : 'Bài viết còn ngắn, hãy viết đủ ý và kiểm tra ngữ pháp.'
+      }
+    </p>
+  `;
+}
+
+function aiGrade(){
+
+  const a=document.getElementById("ai");
+
+  a.style.display="block";
+
+  a.innerHTML=`
+    <h3>🤖 AI CHỮA BÀI</h3>
+
+    <p>
+      <b>Listening:</b>
+      kiểm tra đáp án, từ khóa và khả năng nghe ý chính.
+    </p>
+
+    <p>
+      <b>Speaking:</b>
+      nhận xét phát âm, từ vựng, ngữ pháp,
+      độ trôi chảy và gợi ý câu tốt hơn.
+    </p>
+
+    <p>
+      <b>Reading:</b>
+      giải thích vì sao đúng/sai
+      và chỉ ra từ khóa trong bài.
+    </p>
+
+    <p>
+      <b>Writing:</b>
+      sửa từng lỗi ngữ pháp, từ vựng,
+      chính tả và đưa ra bài mẫu tương đương.
+    </p>
+
+    <p class="small">
+      Bản hiện tại là AI mô phỏng chạy ngay trên trang.
+      Có thể nâng cấp kết nối API AI thật sau.
+    </p>
+  `;
+}
+
+</script>
+
+</body>
+</html>
