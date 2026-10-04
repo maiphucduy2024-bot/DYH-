@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DIY ENGLISH 8 • Ôn thi lớp 8</title>
+<style>
+*{box-sizing:border-box}
+body,#app{
+  margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#071a33,#102b4c 45%,#07111f);
+  color:#fff;font-family:Arial,sans-serif;overflow:hidden
+}
+.card{
+  width:min(720px,94vw);max-height:92vh;overflow:auto;padding:28px;border:1px solid #4da3ff;
+  border-radius:24px;background:rgba(12,8,24,.94);
+  box-shadow:0 0 35px #1685ff33;text-align:center
+}
+h1{margin:0 0 8px;color:#8dccff;text-shadow:0 0 15px #1685ff}
+.sub{color:#aaa;margin-bottom:25px}
+button{
+  width:100%;padding:13px;margin:8px 0;border:0;border-radius:12px;
+  color:white;font-weight:bold;cursor:pointer;background:linear-gradient(90deg,#1677d2,#29a8ff);
+  box-shadow:0 0 15px #1685ff55
+}
+button:hover{filter:brightness(1.15)}
+.hidden{display:none}
+.row,.exam-card{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px;margin:10px 0;border-radius:14px;background:#0d1d31;border:1px solid #23496b
+}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid button{margin:0}
+.exam-card{text-align:left}.exam-card h3{margin:0 0 8px}.answer{width:100%;padding:11px;border-radius:10px;border:1px solid #315a7e;background:#081522;color:#fff;margin-top:8px}
+.score{font-size:26px;color:#7dccff;font-weight:bold;margin:12px}
+.timer{position:sticky;top:0;z-index:5;padding:12px;margin:-8px 0 14px;border-radius:12px;background:#071a2d;border:1px solid #4da3ff;color:#8dccff;font-size:22px;font-weight:800;text-align:center}
+.timer.warning{color:#ffd166;border-color:#ffd166}.timer.danger{color:#ff7b7b;border-color:#ff7b7b}
+.section-title{margin-top:22px;padding:10px 12px;border-left:4px solid #29a8ff;background:#1685ff16;border-radius:8px;color:#9ed8ff}
+.listen-q,.grammar-q{padding:12px;margin:10px 0;border:1px solid #23496b;border-radius:12px;background:#081522}
+.locked{pointer-events:none;opacity:.65}
+.small{font-size:11px;color:#777;margin-top:14px}
+.content-card{display:grid;grid-template-columns:140px 1fr 1fr;gap:18px;margin-top:12px;padding:20px;text-align:left;border-radius:18px;background:linear-gradient(145deg,#102943,#0b1c30);border:1px solid #2b5275;box-shadow:0 12px 28px #0005}
+.content-head{display:flex;align-items:center;gap:10px;color:#9ed8ff;font-size:18px;font-weight:800;line-height:1.25}
+.content-head .icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#1685ff22;border:1px solid #1685ff55;font-size:22px}
+.term-block{padding:4px 0}.term-title{display:flex;align-items:center;gap:8px;margin:0 0 9px;font-size:14px;color:#7dccff}.term-title span{padding:4px 8px;border-radius:7px;background:#1685ff1c;border:1px solid #1685ff44;font-size:11px}.units{margin:0;color:#d8e6f3;font-size:12px;line-height:1.75}.focus{margin:0;color:#9fb5c9;font-size:11px;line-height:1.65}
+@media(max-width:650px){.content-card{grid-template-columns:1fr;gap:12px}.content-head{font-size:16px}.term-block{padding-top:2px}}
+</style>
+</head>
+
+<body id="app">
+
+<div class="card" id="gate">
+  <h1>📘 DIY ENGLISH 8</h1>
+  <div class="sub">ÔN THI TIẾNG ANH LỚP 8 • 4 KỸ NĂNG</div>
+  <h2>🎓 LUYỆN THI THEO HỌC KỲ</h2>
+  <p class="sub">Giữa kỳ 1 • Cuối kỳ 1 • Giữa kỳ 2 • Cuối kỳ 2</p>
+  <button onclick="openMenu()">🚀 BẮT ĐẦU LUYỆN TẬP</button>
+  <div class="small">Có bài tập mẫu cho Nghe • Nói • Đọc • Viết</div>
+</div>
+
+<div class="card hidden" id="menu">
+  <h1>📚 DIY ENGLISH 8</h1>
+  <div class="sub">Ngân hàng đề bám sát Global Success 8</div>
+
+  <div class="grid">
+    <button onclick="showExam('Giữa kỳ 1')">📝 Giữa kỳ 1</button>
+    <button onclick="showExam('Cuối kỳ 1')">📖 Cuối kỳ 1</button>
+    <button onclick="showExam('Giữa kỳ 2')">📝 Giữa kỳ 2</button>
+    <button onclick="showExam('Cuối kỳ 2')">🏆 Cuối kỳ 2</button>
+  </div>
+
+  <div class="grid">
+    <button onclick="showExam('Listening')">🎧 NGHE</button>
+    <button onclick="showExam('Speaking')">🎤 NÓI</button>
+    <button onclick="showExam('Reading')">📖 ĐỌC HIỂU</button>
+    <button onclick="showExam('Writing')">✍️ VIẾT</button>
+  </div>
+
+  <div class="content-card">
+    <div class="content-head">
+      <div class="icon">📚</div>
+      <div>Nội dung<br>Global Success 8</div>
+    </div>
+
+    <div class="term-block">
+      <h3 class="term-title"><span>HK1</span> Học kỳ 1</h3>
+      <p class="units">
+        <b>Unit 1</b> Leisure time<br>
+        <b>Unit 2</b> Life in the countryside<br>
+        <b>Unit 3</b> Teenagers<br>
+        <b>Unit 4</b> Ethnic groups of Viet Nam<br>
+        <b>Unit 5</b> Our customs and traditions<br>
+        <b>Unit 6</b> Lifestyles
+      </p>
+    </div>
+
+    <div class="term-block">
+      <h3 class="term-title"><span>HK2</span> Học kỳ 2</h3>
+      <p class="units">
+        <b>Unit 7</b> Environmental protection<br>
+        <b>Unit 8</b> Shopping<br>
+        <b>Unit 9</b> Natural disasters<br>
+        <b>Unit 10</b> Communication in the future<br>
+        <b>Unit 11</b> Science and technology<br>
+        <b>Unit 12</b> Life on other planets
+      </p>
+    </div>
+
+    <p class="focus" style="grid-column:1/-1">
+      🎯 <b>Dạng bài trọng tâm:</b>
+      nghe chọn đáp án / điền từ / True-False · phát âm · từ vựng & ngữ pháp ·
+      đọc hiểu tìm thông tin / suy luận · viết lại câu & viết đoạn văn.
+    </p>
+  </div>
+
+  <div id="exam" class="exam-card" style="display:none"></div>
+
+  <button onclick="aiGrade()">🤖 AI CHỮA BÀI CHI TIẾT</button>
+  <div id="ai" class="exam-card" style="display:none"></div>
+</div>
+
+<script>
+
+function openMenu(){
+  document.getElementById("gate").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+}
+
+function showExam(term){
+
+  const e=document.getElementById("exam");
+  e.style.display="block";
+
+  e.innerHTML=`
+  <div class="timer" id="examTimer">⏱️ 45:00</div>
+
+  <h3>📌 ${term} — ĐỀ KIỂM TRA</h3>
+
+  <p class="small">
+    ⏱️ Thời gian mặc định 45 phút.
+    Bạn có thể chọn thời gian phù hợp trước khi bắt đầu.
+  </p>
+
+  <select class="answer" id="timeLimit">
+    <option value="15">15 phút</option>
+    <option value="30">30 phút</option>
+    <option value="45" selected>45 phút (tối đa)</option>
+  </select>
+
+  <button onclick="startExamTimer()">▶ BẮT ĐẦU TÍNH GIỜ</button>
+
+  <div id="paper">
+
+  <div class="section-title"><b>PHẦN I — LISTENING</b></div>
+
+  <p>${getListeningInfo(term)}</p>
+
+  <button onclick="playListening(this)">
+    ▶ PHÁT BÀI NGHE
+  </button>
+
+  <div id="listenQuestions" class="small">
+    ▶ Bấm phát bài nghe để hiện câu hỏi.
+  </div>
+
+  <div class="listen-q">
+    <b>Câu 1.</b> Who is speaking?
+    <select class="answer" id="listen1">
+      <option value="">-- Chọn đáp án --</option>
+      <option value="A">A. Lan</option>
+      <option>B. Nam</option>
+      <option>C>Mai</option>
+    </select>
+  </div>
+
+  <div class="listen-q">
+    <b>Câu 2.</b> What activity is mentioned?
+    <select class="answer" id="listen2">
+      <option value="">-- Chọn đáp án --</option>
+      <option value="A">A. Cleaning</option>
+      <option>B>Swimming</option>
+      <option>C>Cooking</option>
+    </select>
+  </div>
+
+  <div class="listen-q">
+    <b>Câu 3.</b> When does the activity happen?
+    <select class="answer" id="listen3">
+      <option value="">-- Chọn đáp án --</option>
+      <option value="A">A. Every weekend</option>
+      <option>B>Every Monday</option>
+      <option>C>Every month</option>
+    </select>
+  </div>
+
+  <div class="listen-q">
+    <b>Câu 4.</b> What does the speaker's cousin do on the farm?
+    <input class="answer" id="listen4"
+      placeholder="Trả lời bằng tiếng Anh...">
+  </div>
+
+  <div class="listen-q">
+    <b>Câu 5.</b> Why do you think the activity is useful for the community?
+    <input class="answer" id="listen5"
+      placeholder="Trả lời ngắn bằng tiếng Anh...">
+  </div>
+
+  <div class="section-title">
+    <b>PHẦN II — SPEAKING</b>
+  </div>
+
+  <p>
+    <b>Chủ đề:</b>
+    <span id="speakingTopic">Life in the countryside</span>
+  </p>
+
+  <p>
+    Trình bày khoảng 1–2 phút: mô tả cuộc sống ở nông thôn,
+    nêu ít nhất 2 điều bạn thích hoặc không thích, và giải thích lý do.
+    Sau đó trả lời câu hỏi mở rộng:
+    <i>Would you like to live in the countryside in the future?
+    Why or why not?</i>
+  </p>
+
+  <textarea
+    class="answer"
+    id="speak"
+    rows="3"
+    placeholder="Gõ câu trả lời nói của bạn để AI nhận xét...">
+  </textarea>
+
+  <button onclick="requestMicrophone()">
+    🎙️ CHO PHÉP MICROPHONE
+  </button>
+
+  <button onclick="startSpeakingRecord()">
+    🔴 BẮT ĐẦU THU GIỌNG
+  </button>
+
+  <button onclick="stopSpeakingRecord()">
+    ⏹️ DỪNG THU
+  </button>
+
+  <div id="speakingStatus" class="small">
+    Chưa cấp quyền microphone.
+    Hãy bấm “CHO PHÉP MICROPHONE”, sau đó chọn
+    <b>Cho phép</b> trong thông báo của trình duyệt.
+  </div>
+
+  <div id="speakingPlayback"
+    style="display:block;margin-top:12px;padding:14px;
+    border:2px solid #29a8ff;border-radius:12px;
+    background:#0d1d31">
+
+    <b>🔊 PHÁT LẠI BÀI NÓI</b>
+
+    <div id="speakingPlaybackHint" class="small">
+      Sau khi bấm DỪNG THU, bản ghi sẽ xuất hiện bên dưới.
+    </div>
+
+    <audio id="speakingAudio"
+      controls
+      preload="metadata"
+      style="display:block;width:100%;margin-top:8px">
+    </audio>
+
+    <button type="button" onclick="replaySpeaking()">
+      🔁 PHÁT LẠI TỪ ĐẦU
+    </button>
+  </div>
+
+  <div class="section-title">
+    <b>PHẦN III — READING</b>
+  </div>
+
+  <p>
+    <b>Read the passage and answer the questions.</b>
+  </p>
+
+  <div class="exam-card" style="display:block">
+
+    <p>
+      Life in the countryside can be peaceful and rewarding.
+      Many teenagers enjoy the fresh air, open spaces and close
+      relationships between neighbours. In some villages, young
+      people help their parents grow vegetables, look after animals
+      or take part in community activities. However, country life
+      also has some challenges. Public transport may be limited,
+      and there are usually fewer entertainment centres than in big
+      cities. For this reason, some teenagers prefer city life.
+      Others believe that living in the countryside teaches them
+      useful skills, makes them more responsible and helps them
+      appreciate nature.
+    </p>
+
+  </div>
+
+  <div class="listen-q">
+    <b>1. True or False:</b>
+    Country life can be peaceful.
+
+    <select class="answer" id="read1">
+      <option value="">-- Chọn --</option>
+      <option value="T">True</option>
+      <option value="F">False</option>
+    </select>
+  </div>
+
+  <div class="listen-q">
+    <b>2. True or False:</b>
+    There are always many entertainment centres in villages.
+
+    <select class="answer" id="read2">
+      <option value="">-- Chọn --</option>
+      <option value="T">True</option>
+      <option value="F">False</option>
+    </select>
+  </div>
+
+  <div class="listen-q">
+    <b>3. Multiple choice:</b>
+    What may be limited in the countryside?
+
+    <select class="answer" id="read3">
+      <option value="">-- Chọn đáp án --</option>
+      <option value="A">A. Public transport</option>
+      <option>B>Fresh air</option>
+      <option>C>Nature</option>
+      <option>D>Neighbours</option>
+    </select>
+  </div>
+
+  <div class="listen-q">
+    <b>4. Short answer:</b>
+    Name one activity young people may do to help their parents.
+
+    <input class="answer" id="read4"
+      placeholder="Trả lời bằng tiếng Anh...">
+  </div>
+
+  <div class="listen-q">
+    <b>5. Inference:</b>
+    Why do some teenagers prefer city life?
+
+    <input class="answer" id="read5"
+      placeholder="Trả lời ngắn bằng tiếng Anh...">
+  </div>
+
+  <div class="section-title">
+    <b>PHẦN IV — LANGUAGE & GRAMMAR</b>
+  </div>
+
+  <div class="exam-card" style="display:block">
+
+    ${grammarQuestion(1,
+    "I enjoy ______ books in my free time.",
+    ["read","reading","to reading","reads"])}
+
+    ${grammarQuestion(2,
+    "If it rains tomorrow, we ______ at home.",
+    ["stay","stayed","will stay","staying"])}
+
+    ${grammarQuestion(3,
+    "My brother runs ______ than me.",
+    ["fast","faster","fastest","more fast"])}
+
+    ${grammarQuestion(4,
+    "She ______ to school every day.",
+    ["go","goes","going","gone"])}
+
+    ${grammarQuestion(5,
+    "We ______ dinner when he called.",
+    ["have","had","were having","are having"])}
+
+    ${grammarQuestion(6,
+    "You ______ wear a helmet when riding a bike.",
+    ["should","could","would","may"])}
+
+    ${grammarQuestion(7,
+    "This book is ______ than that one.",
+    ["interesting","more interesting","most interesting","interest"])}
+
+    ${grammarQuestion(8,
+    "I have lived here ______ 2020.",
+    ["for","since","at","in"])}
+
+    ${grammarQuestion(9,
+    "If I have time, I ______ you.",
+    ["help","will help","helped","helping"])}
+
+    ${grammarQuestion(10,
+    "They are interested in ______ English.",
+    ["learn","learning","learned","to learn"])}
+
+    ${grammarQuestion(11,
+    "There ______ a lot of trees near my house.",
+    ["is","are","be","being"])}
+
+    ${grammarQuestion(12,
+    "We have lived here ______ five years.",
+    ["for","since","from","at"])}
+
+    ${grammarQuestion(13,
+    "My sister is good ______ drawing.",
+    ["in","at","on","for"])}
+
+    ${grammarQuestion(14,
+    "He was tired, ______ he continued working.",
+    ["because","so","but","or"])}
+
+    ${grammarQuestion(15,
+    "If people recycle more, the environment ______ cleaner.",
+    ["became","will become","becoming","would became"])}
+
+    ${grammarQuestion(16,
+    "We should avoid ______ too much plastic.",
+    ["use","using","to using","used"])}
+
+    ${grammarQuestion(17,
+    "This is ______ village in the area.",
+    ["beautiful","more beautiful","the most beautiful","beautifully"])}
+
+    ${grammarQuestion(18,
+    "She speaks English ______ than her brother.",
+    ["fluent","more fluently","most fluent","fluency"])}
+
+    ${grammarQuestion(19,
+    "My parents ______ TV when I came home.",
+    ["watch","watched","were watching","are watching"])}
+
+    ${grammarQuestion(20,
+    "I ______ my homework already.",
+    ["finish","finished","have finished","am finishing"])}
+
+    ${grammarQuestion(21,
+    "Would you mind ______ the window?",
+    ["open","opening","to open","opened"])}
+
+    ${grammarQuestion(22,
+    "She asked me where I ______.",
+    ["live","lived","living","am live"])}
+
+    ${grammarQuestion(23,
+    "The book ______ by many students last year.",
+    ["reads","read","was read","is reading"])}
+
+    ${grammarQuestion(24,
+    "You don't have to ______ all the food.",
+    ["eat","eating","ate","to eating"])}
+
+    ${grammarQuestion(25,
+    "Let's ______ a clean-up activity this weekend.",
+    ["join","joining","to join","joined"])}
+
+    ${grammarQuestion(26,
+    "Neither Tom nor his friends ______ late.",
+    ["is","are","was","be"])}
+
+    ${grammarQuestion(27,
+    "I prefer reading books ______ playing games.",
+    ["than","to","with","for"])}
+
+    ${grammarQuestion(28,
+    "We should turn ______ the lights when leaving.",
+    ["on","off","up","into"])}
+
+    ${grammarQuestion(29,
+    "The storm was ______ than we expected.",
+    ["strong","stronger","strongest","strongly"])}
+
+    ${grammarQuestion(30,
+    "By the time we arrived, the train ______.",
+    ["leaves","left","had left","has left"])}
+
+    ${grammarQuestion(31,
+    "If I ______ you, I would talk to the teacher.",
+    ["am","were","was","be"])}
+
+    ${grammarQuestion(32,
+    "He suggested ______ a bicycle to school.",
+    ["ride","riding","to ride","rode"])}
+
+    ${grammarQuestion(33,
+    "There isn't ______ milk left.",
+    ["much","many","a few","several"])}
+
+    ${grammarQuestion(34,
+    "We need ______ information before making a decision.",
+    ["many","more","few","a"])}
+
+    ${grammarQuestion(35,
+    "Although it was raining, they ______ the football match.",
+    ["cancel","cancelled","continued","continues"])}
+
+    ${grammarQuestion(36,
+    "The students are looking forward to ______ the museum.",
+    ["visit","visiting","visited","to visit"])}
+
+    ${grammarQuestion(37,
+    "She has never ______ to a village before.",
+    ["go","went","been","going"])}
+
+    ${grammarQuestion(38,
+    "The air in the countryside is ______ than in the city.",
+    ["polluted","less polluted","most polluted","more pollute"])}
+
+    ${grammarQuestion(39,
+    "We will go hiking ______ the weather is good.",
+    ["if","unless","because of","despite"])}
+
+    ${grammarQuestion(40,
+    "They have to leave early ______ they don't miss the bus.",
+    ["but","although","so that","or"])}
+
+  </div>
+
+  <div class="section-title">
+    <b>PHẦN V — WRITING</b>
+  </div>
+
+  <p>
+    <b>Đề bài:</b>
+    Write <b>80–100 words</b> about
+    <i>life in the countryside</i>.
+    Describe what people do there, give two advantages and one
+    disadvantage, and say whether you would like to live there
+    in the future.
+  </p>
+
+  <p class="small">
+    📌 Điều kiện: bài phải từ 80 đến 100 từ.
+    Điểm Writing sẽ dựa vào
+    <b>ngữ pháp, từ vựng, nội dung, bố cục và độ dài</b>,
+    không chỉ dựa vào số từ.
+  </p>
+
+  <textarea class="answer"
+    id="write"
+    rows="5"
+    placeholder="Viết bài 80–100 từ ở đây..."></textarea>
+
+  <button onclick="checkExam('${term}')">
+    ✅ NỘP BÀI
+  </button>
+
+  <div id="result"></div>
+
+  </div>
+  `;
+
+  examTimer=null;
+}
+
+function grammarQuestion(num,text,options){
+
+  return `
+  <p>
+    <b>Câu ${num}.</b> ${text}
+  </p>
+
+  <select class="answer" id="grammar${num}">
+    <option value="">-- Chọn đáp án --</option>
+    <option value="A">A. ${options[0]}</option>
+    <option value="B">B. ${options[1]}</option>
+    <option value="C">C. ${options[2]}</option>
+    <option value="D">D. ${options[3]}</option>
+  </select>
+  `;
+}
+
+let examTimer=null;
+let examSeconds=2700;
+let examLocked=false;
+
+let speakingRecorder=null;
+let speakingStream=null;
+let speakingChunks=[];
+
+async function startSpeakingRecord(){
+
+  try{
+
+    if(!navigator.mediaDevices?.getUserMedia)
+      throw new Error("MIC");
+
+    speakingStream=
+      await navigator.mediaDevices.getUserMedia({audio:true});
+
+    speakingChunks=[];
+
+    speakingRecorder=
+      new MediaRecorder(speakingStream);
+
+    speakingRecorder.ondataavailable=e=>{
+      if(e.data.size)
+        speakingChunks.push(e.data);
+    };
+
+    speakingRecorder.onstop=()=>{
+
+      const blob=new Blob(
+        speakingChunks,
+        {type:speakingRecorder.mimeType||"audio/webm"}
+      );
+
+      const audio=
+        document.getElementById("speakingAudio");
+
+      const playback=
+        document.getElementById("speakingPlayback");
+
+      audio.src=URL.createObjectURL(blob);
+      audio.load();
+
+      audio.style.display="block";
+      playback.style.display="block";
+
+      document.getElementById(
+        "speakingPlaybackHint"
+      ).textContent=
+        "✅ Bản thu đã sẵn sàng. Bấm ▶ trên thanh phát hoặc nút PHÁT LẠI TỪ ĐẦU.";
+
+      speakingStream?.getTracks().forEach(
+        t=>t.stop()
+      );
+    };
+
+    speakingRecorder.start();
+
+    document.getElementById(
+      "speakingStatus"
+    ).textContent=
+      "🔴 Đang thu âm... Hãy nói rõ ràng trong khoảng 1–2 phút.";
+
+    if(
+      "SpeechRecognition" in window ||
+      "webkitSpeechRecognition" in window
+    ){
+
+      const R=
+        window.SpeechRecognition||
+        window.webkitSpeechRecognition;
+
+      window.speakingRecognition=
+        new R();
+
+      window.speakingRecognition.lang=
+        "en-US";
+
+      window.speakingRecognition.continuous=
+        true;
+
+      window.speakingRecognition.interimResults=
+        false;
+
+      window.speakingRecognition.onresult=e=>{
+
+        let text="";
+
+        for(
+          let i=e.resultIndex;
+          i<e.results.length;
+          i++
+        ){
+
+          if(e.results[i].isFinal)
+            text+=
+              e.results[i][0].transcript+
+              " ";
+        }
+
+        const s=
+          document.getElementById("speak");
+
+        s.value=
+          (s.value+" "+text).trim();
+      };
+
+      window.speakingRecognition.start();
+    }
+
+  }catch(err){
+
+    alert(
+      "Không thể dùng microphone. Hãy cho phép trình duyệt truy cập microphone và thử lại."
+    );
+  }
+}
+
+async function requestMicrophone(){
+
+  try{
+
+    if(!navigator.mediaDevices?.getUserMedia)
+      throw new Error("MIC");
+
+    const stream=
+      await navigator.mediaDevices.getUserMedia({
+        audio:true
+      });
+
+    stream.getTracks().forEach(
+      t=>t.stop()
+    );
+
+    document.getElementById(
+      "speakingStatus"
+    ).textContent=
+      "✅ Đã được cấp quyền microphone. Bây giờ bạn có thể bấm “BẮT ĐẦU THU GIỌNG”.";
+
+  }catch(err){
+
+    document.getElementById(
+      "speakingStatus"
+    ).textContent=
+      "❌ Chưa được cấp quyền microphone. Hãy chọn “Cho phép” trong thông báo của trình duyệt rồi thử lại.";
+
+    alert(
+      "Hãy chọn “Cho phép” để trang có thể dùng microphone."
+    );
+  }
+}
+
+function stopSpeakingRecord(){
+
+  if(
+    speakingRecorder &&
+    speakingRecorder.state!=="inactive"
+  ){
+    speakingRecorder.stop();
+  }
+
+  if(window.speakingRecognition){
+
+    try{
+      window.speakingRecognition.stop();
+    }catch(e){}
+  }
+
+  const status=
+    document.getElementById(
+      "speakingStatus"
+    );
+
+  if(status)
+    status.textContent=
+      "✅ Đã thu xong. Khung PHÁT LẠI BÀI NÓI nằm ngay bên dưới.";
+
+  const playback=
+    document.getElementById(
+      "speakingPlayback"
+    );
+
+  if(playback)
+    playback.style.display="block";
+
+  const audio=
+    document.getElementById(
+      "speakingAudio"
+    );
+
+  if(
+    audio &&
+    speakingChunks.length
+  ){
+
+    const blob=
+      new Blob(
+        speakingChunks,
+        {
+          type:
+            speakingRecorder?.mimeType||
+            "audio/webm"
+        }
+      );
+
+    audio.src=
+      URL.createObjectURL(blob);
+
+    audio.load();
+  }
+}
+
+function replaySpeaking(){
+
+  const audio=
+    document.getElementById(
+      "speakingAudio"
+    );
+
+  if(!audio || !audio.src)
+    return;
+
+  audio.currentTime=0;
+
+  audio.play().catch(()=>{});
+}
+
+function startExamTimer(){
+
+  if(examTimer)
+    clearInterval(examTimer);
+
+  examLocked=false;
+
+  examSeconds=
+    Math.min(
+      45,
+      Number(
+        document.getElementById(
+          "timeLimit"
+        ).value
+      )||45
+    )*60;
+
+  const paper=
+    document.getElementById("paper");
+
+  if(paper)
+    paper.classList.remove("locked");
+
+  updateTimer();
+
+  examTimer=
+    setInterval(()=>{
+
+      examSeconds--;
+
+      updateTimer();
+
+      if(examSeconds<=0)
+        lockExam();
+
+    },1000);
+}
+
+function updateTimer(){
+
+  const t=
+    document.getElementById(
+      "examTimer"
+    );
+
+  if(!t)
+    return;
+
+  const m=
+    Math.floor(examSeconds/60);
+
+  const s=
+    examSeconds%60;
+
+  t.textContent=
+    `⏱️ ${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+  t.className=
+    "timer"+
+    (
+      examSeconds<=60
+      ?" danger"
+      :examSeconds<=300
+      ?" warning"
+      :""
+    );
+}
+
+function lockExam(){
+
+  if(examLocked)
+    return;
+
+  examLocked=true;
+
+  if(examTimer)
+    clearInterval(examTimer);
+
+  const paper=
+    document.getElementById("paper");
+
+  if(paper)
+    paper.classList.add("locked");
+
+  const t=
+    document.getElementById("examTimer");
+
+  if(t)
+    t.textContent=
+      "⛔ HẾT GIỜ — BÀI ĐÃ KHÓA";
+
+  const btn=
+    document.querySelector(
+      '#paper button[onclick^="checkExam"]'
+    );
+
+  if(btn){
+
+    btn.disabled=true;
+
+    btn.textContent=
+      "🔒 BÀI ĐÃ KHÓA";
+  }
+
+  alert(
+    "⏰ Hết giờ! Bài kiểm tra đã được khóa."
+  );
+}
+
+function getListeningInfo(term){
+
+  const info={
+
+    "Giữa kỳ 1":
+      "Nghe về thời gian rảnh và cuộc sống ở nông thôn — chọn đáp án đúng.",
+
+    "Cuối kỳ 1":
+      "Nghe về thanh thiếu niên và phong tục truyền thống — True/False.",
+
+    "Giữa kỳ 2":
+      "Nghe về bảo vệ môi trường và mua sắm — điền thông tin còn thiếu.",
+
+    "Cuối kỳ 2":
+      "Nghe về thiên tai, công nghệ và tương lai — chọn đáp án và từ khóa.",
+
+    "Listening":
+      "Luyện nghe tổng hợp nhiều chủ đề — mỗi lần chọn một bài khác nhau."
+  };
+
+  return info[term]||
+    "Nghe 2 lần — luyện chọn đáp án, điền từ và True/False.";
+}
+
+function playListening(btn){
+
+  const term=
+    document.querySelector(
+      "#exam h3"
+    )?.textContent||"";
+
+  const texts={
+
+    "Giữa kỳ 1":
+      "Hi, I am Lan. In my free time, I enjoy reading books and playing badminton. My cousin lives in the countryside. He likes helping his parents on the farm and riding a bicycle around the village.",
+
+    "Cuối kỳ 1":
+      "Mai is a teenager who enjoys spending time with her friends. At weekends, her family often follows a traditional custom of having dinner together. Everyone helps prepare the food and shares stories after dinner.",
+
+    "Giữa kỳ 2":
+      "Our school is starting an environmental project. Students will collect paper and plastic bottles every Friday. They will also visit a local shop to learn how to choose useful products and avoid unnecessary packaging.",
+
+    "Cuối kỳ 2":
+      "Last year, our town had a strong storm. People prepared emergency bags and listened to weather warnings. In the future, new technology may help us communicate faster and give earlier warnings about natural disasters.",
+
+    "Listening":
+      "Hello! My name is Nam. I enjoy helping my community. Every weekend, I join a clean-up activity with my friends."
+  };
+
+  const questions={
+
+    "Giữa kỳ 1":
+      "After listening, answer: 1) What does Lan enjoy? 2) Where does her cousin live? 3) What does he help his parents with?",
+
+    "Cuối kỳ 1":
+      "After listening, answer True/False: 1) Mai is a teenager. 2) Her family has dinner together at weekends. 3) Nobody helps prepare the food.",
+
+    "Giữa kỳ 2":
+      "After listening, fill in the blanks: 1) Students collect paper and ______ every Friday. 2) They visit a local ______. 3) They learn to avoid unnecessary ______.",
+
+    "Cuối kỳ 2":
+      "After listening, choose: 1) What happened last year? 2) What did people listen to? 3) What may technology provide earlier?",
+
+    "Listening":
+      "After listening, answer: 1) Who is speaking? 2) What activity does he join? 3) When does he join it?"
+  };
+
+  let key=
+    Object.keys(texts).find(
+      k=>term.includes(k)
+    )||"Listening";
+
+  const text=
+    texts[key];
+
+  if(!("speechSynthesis" in window)){
+
+    alert(
+      "Trình duyệt này chưa hỗ trợ phát giọng nói."
+    );
+
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const u=
+    new SpeechSynthesisUtterance(text);
+
+  u.lang="en-US";
+  u.rate=.9;
+
+  btn.textContent=
+    "🔊 Đang phát bài nghe...";
+
+  u.onend=()=>{
+    btn.textContent=
+      "▶ PHÁT LẠI BÀI NGHE";
+  };
+
+  speechSynthesis.speak(u);
+
+  const oldQ=
+    document.getElementById(
+      "listenQuestions"
+    );
+
+  if(oldQ)
+    oldQ.innerHTML=
+      "<b>📝 Câu hỏi:</b> "+
+      (questions[key]||questions.Listening);
+}
+
+function checkExam(term){
+
+  if(examLocked){
+
+    alert(
+      "⛔ Hết giờ — bài đã bị khóa."
+    );
+
+    return;
+  }
+
+  const write=
+    document.getElementById(
+      "write"
+    ).value.trim();
+
+  const speak=
+    document.getElementById(
+      "speak"
+    ).value.trim();
+
+  const grammarAnswers=[
+    "B","C","B","B","C",
+    "A","B","B","B","B",
+    "B","A","B","C","B",
+    "B","C","B","C","C",
+    "B","B","C","A","A",
+    "B","B","B","B","C",
+    "B","B","A","B","C",
+    "B","C","B","A","C"
+  ];
+
+  const grammarScore=
+    grammarAnswers.filter(
+      (answer,index)=>
+        document.getElementById(
+          "grammar"+(index+1)
+        )?.value===answer
+    ).length;
+
+  const listeningScore=[
+    document.getElementById("listen1")?.value==="A",
+    document.getElementById("listen2")?.value==="A",
+    document.getElementById("listen3")?.value==="A",
+    document.getElementById("listen4")?.value.trim().length>2,
+    document.getElementById("listen5")?.value.trim().length>8
+  ].filter(Boolean).length;
+
+  const readingScore=[
+    document.getElementById("read1")?.value==="T",
+    document.getElementById("read2")?.value==="F",
+    document.getElementById("read3")?.value==="A",
+    document.getElementById("read4")?.value.trim().length>2,
+    document.getElementById("read5")?.value.trim().length>8
+  ].filter(Boolean).length;
+
+  const wordCount=
+    write
+    ?write.split(/\s+/).filter(Boolean).length
+    :0;
+
+  const writingOk=
+    wordCount>=80 &&
+    wordCount<=100;
+
+  const speakWords=
+    speak
+    ? speak.split(/\s+/).filter(Boolean)
+    :[];
+
+  const speakingCriteria={
+
+    length:
+      speakWords.length>=20,
+
+    topic:
+      /countryside|village|rural|farm|nature|city/i.test(speak),
+
+    reasons:
+      /because|so|prefer|like|dislike|future|would/i.test(speak),
+
+    grammar:
+      !/\b(i goes|she go|he go|they is|we is|i has|he have)\b/i.test(speak)
+  };
+
+  const speakingPoints=
+    Object.values(
+      speakingCriteria
+    ).filter(Boolean).length;
+
+  const commonErrors=[
+
+    [/\bi am go\b/i,"I am going"],
+    [/\bi goes\b/i,"I go"],
+    [/\bhe go\b/i,"he goes"],
+    [/\bshe go\b/i,"she goes"],
+    [/\bi has\b/i,"I have"],
+    [/\bhe have\b/i,"he has"],
+    [/\bthey is\b/i,"they are"],
+    [/\bwe is\b/i,"we are"],
+    [/\bi can to /i,"I can "],
+    [/\benjoy to /i,"enjoy + V-ing"],
+    [/\byesterday .*\bgo\b/i,"past tense: went"],
+    [/\bi very like\b/i,"I really like"],
+    [/\bmore better\b/i,"better"]
+  ];
+
+  const foundErrors=[];
+
+  commonErrors.forEach(
+    ([rx,fix])=>{
+      if(rx.test(write))
+        foundErrors.push(fix);
+    }
+  );
+
+  const sentences=
+    write
+    ?write
+      .split(/[.!?]+/)
+      .map(x=>x.trim())
+      .filter(Boolean)
+    :[];
+
+  const sentenceCount=
+    sentences.length;
+
+  const uppercaseIssues=
+    sentences.filter(
+      s=>s&&!/^[A-Z]/.test(s)
+    ).length;
+
+  const punctuationIssues=
+    write&&sentences.length
+    ?sentences.filter(
+      s=>s&&!/[A-Za-z]$/.test(s)
+    ).length
+    :0;
+
+  const contentChecks={
+
+    countryside:
+      /countryside|village|rural|farm/i.test(write),
+
+    activities:
+      /people|farmer|farm|grow|work|live|help|plant|raise/i.test(write),
+
+    advantages:
+      /advantage|good|benefit|peaceful|fresh|quiet|friendly|nature|air/i.test(write),
+
+    disadvantage:
+      /disadvantage|however|but|difficult|limited|problem|transport|entertainment/i.test(write),
+
+    future:
+      /would like|wouldn't like|want to|prefer|future|live there/i.test(write)
+  };
+
+  const contentScore=
+    Object.values(
+      contentChecks
+    ).filter(Boolean).length;
+
+  const grammarErrorCount=
+    foundErrors.length+
+    uppercaseIssues+
+    punctuationIssues;
+
+  const grammarScoreWriting=
+    wordCount===0
+    ?0
+    :Math.max(
+      0,
+      Math.round(
+        4-
+        Math.min(
+          4,
+          grammarErrorCount*.75
+        )
+      )
+    );
+
+  const vocabularyScore=
+    wordCount===0
+    ?0
+    :Math.min(
+      2,
+      Math.round(
+        (
+          new Set(
+            write
+              .toLowerCase()
+              .match(/[a-z]+/g)||[]
+          ).size/
+          Math.max(1,wordCount)
+        )*4
+      )
+    );
+
+  const organizationScore=
+    wordCount===0
+    ?0
+    :Math.min(
+      2,
+      Math.round(
+        (sentenceCount>=5?1:0)+
+        (
+          contentChecks.future&&
+          contentChecks.disadvantage
+          ?1
+          :0
+        )
+      )
+    );
+
+  const lengthScore=
+    wordCount===0
+    ?0
+    :
+      (
+        wordCount>=80&&
+        wordCount<=100
+      )
+      ?2
+      :
+        (
+          wordCount>=70&&
+          wordCount<=110
+        )
+        ?1
+        :0;
+
+  const writingScore=
+    wordCount===0
+    ?0
+    :Math.min(
+      15,
+      Math.round(
+        (contentScore/5)*5+
+        grammarScoreWriting+
+        vocabularyScore+
+        organizationScore+
+        lengthScore
+      )
+    );
+
+  const writingMax=15;
+
+  const writingNote=
+    wordCount===0
+    ?"Chưa có bài viết — 0/15."
+    :
+      !writingOk
+      ?
+      `Bài có ${wordCount} từ. Điều kiện là 80–100 từ nên không thể đạt tối đa điểm Writing.`
+      :
+      `Bài có ${wordCount} từ, đúng yêu cầu 80–100 từ.`;
+
+  const total=
+    Math.round(
+      (listeningScore/5*20)+
+      (readingScore/5*20)+
+      (grammarScore/40*30)+
+      writingScore+
+      (speakingPoints/4*15)
+    );
+
+  const result=
+    document.getElementById(
+      "result"
+    );
+
+  result.innerHTML=`
+
+    <div class="score">
+      ${total}/100
+    </div>
+
+    <p>
+      <b>Listening:</b>
+      ${listeningScore}/5 câu đạt.
+    </p>
+
+    <p>
+      <b>Reading:</b>
+      ${readingScore}/5 câu đạt.
+    </p>
+
+    <p>
+      <b>Grammar:</b>
+      ${grammarScore}/40 câu đúng.
+      ${
+        grammarScore<40
+        ?"Các câu sai cần xem lại quy tắc."
+        :"Xuất sắc — đúng cả 40 câu."
+      }
+    </p>
+
+    <p>
+      <b>Speaking:</b>
+      ${speakingPoints}/4 tiêu chí đạt —
+      ${speakingCriteria.length?"đủ độ dài":"quá ngắn"};
+      ${speakingCriteria.topic?"đúng chủ đề":"thiếu từ khóa chủ đề"};
+      ${speakingCriteria.reasons?"có ý kiến/lý do":"thiếu ý kiến hoặc lý do"};
+      ${
+        speakingCriteria.grammar
+        ?"không phát hiện lỗi ngữ pháp cơ bản"
+        :"có lỗi ngữ pháp cơ bản"
+      }.
+    </p>
+
+    <p class="small">
+      🎤 Phần thu âm được lưu để bạn nghe lại.
+      Điểm Speaking hiện dựa trên nội dung nhận dạng thành văn bản;
+      chưa thể chấm chính xác phát âm như giáo viên/người chấm AI chuyên dụng.
+    </p>
+
+    <p>
+      <b>Writing:</b>
+      ${writingScore}/${writingMax} điểm.
+      ${writingNote}
+    </p>
+
+    <p>
+      <b>📋 Writing rubric:</b>
+      Nội dung ${Math.round((contentScore/5)*5)}/5 ·
+      Ngữ pháp ${grammarScoreWriting}/4 ·
+      Từ vựng ${vocabularyScore}/2 ·
+      Bố cục ${organizationScore}/2 ·
+      Độ dài ${lengthScore}/2.
+    </p>
+
+    <p class="small">
+      ${
+        foundErrors.length
+        ?
+        `🔎 Lỗi/cấu trúc cần xem lại: ${foundErrors.join(" • ")}.`
+        :
+        "✅ Chưa phát hiện lỗi ngữ pháp phổ biến trong bộ kiểm tra hiện tại."
+      }
+
+      ${
+        uppercaseIssues
+        ?`Có ${uppercaseIssues} câu chưa viết hoa đầu câu.`
+        :""
+      }
+
+      ${
+        punctuationIssues
+        ?`Có ${punctuationIssues} câu cần kiểm tra dấu câu.`
+        :""
+      }
+    </p>
+
+    ${
+      foundErrors.length
+      ?
+      `<p><b>💡 Gợi ý sửa:</b> ${foundErrors.join(" • ")}</p>`
+      :""
+    }
+
+    <p class="small">
+      🤖 Bộ chấm thông minh: kiểm tra đáp án, độ dài,
+      cấu trúc lỗi thường gặp, chữ hoa, dấu câu và nội dung Speaking.
+      Đây chưa phải AI cloud nên không thể hiểu mọi lỗi ngữ pháp.
+    </p>
+  `;
+}
+
+function aiGrade(){
+
+  const a=
+    document.getElementById("ai");
+
+  a.style.display="block";
+
+  a.innerHTML=`
+
+    <h3>🤖 AI CHỮA BÀI</h3>
+
+    <p>
+      <b>Listening:</b>
+      kiểm tra đáp án, từ khóa và khả năng nghe ý chính.
+    </p>
+
+    <p>
+      <b>Speaking:</b>
+      nhận xét phát âm, từ vựng, ngữ pháp,
+      độ trôi chảy và gợi ý câu tốt hơn.
+    </p>
+
+    <p>
+      <b>Reading:</b>
+      giải thích vì sao đúng/sai
+      và chỉ ra từ khóa trong bài.
+    </p>
+
+    <p>
+      <b>Writing:</b>
+      sửa từng lỗi ngữ pháp, từ vựng,
+      chính tả và đưa ra bài mẫu tương đương.
+    </p>
+
+    <p class="small">
+      Bản hiện tại là AI mô phỏng chạy ngay trên trang.
+      Có thể nâng cấp kết nối API AI thật sau.
+    </p>
+  `;
+}
+
+</script>
+
+</body>
+</html>
